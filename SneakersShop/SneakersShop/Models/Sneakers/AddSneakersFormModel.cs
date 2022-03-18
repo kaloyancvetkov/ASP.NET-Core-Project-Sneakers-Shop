@@ -30,7 +30,7 @@ namespace SneakersShop.Models.Sneakers
         [MaxLength(SneakersColorMaxLength)]
         public string Color { get; init; }
 
-        [Range(typeof(decimal), "0", "25000")]
+        [Range(0, 25000.99)]
         public decimal Price { get; init; }
 
         [Display(Name = "Category")]

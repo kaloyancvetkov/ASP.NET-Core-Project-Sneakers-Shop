@@ -12,5 +12,7 @@
 
         public const int SneakersColorMaxLength = 20;
         public const int SneakersColorMinLength = 1;
+
+ 
     }
 }
