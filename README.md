@@ -1,1 +1,1 @@
-# ASP.NET-Core-Project-Sneakers-Shop
+# ASP.NET Core Project - Sneakers Shop
