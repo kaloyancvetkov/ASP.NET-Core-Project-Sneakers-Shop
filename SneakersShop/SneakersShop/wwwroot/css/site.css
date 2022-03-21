@@ -15,9 +15,14 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: whitesmoke
 }
 
 .heading-margin {
     margin-top: 20px;
     margin-bottom: 40px;
+}
+
+.bottom-div {
+    background-color: lightgrey;
 }
