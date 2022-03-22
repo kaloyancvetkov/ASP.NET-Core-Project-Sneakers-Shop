@@ -26,3 +26,13 @@ body {
 .bottom-div {
     background-color: lightgrey;
 }
+
+.carousel-inner {
+    // height: 300px;
+}
+
+.item, img {
+    height: 100% !important;
+    width: 100% !important;
+    border: 1px solid beige;
+}

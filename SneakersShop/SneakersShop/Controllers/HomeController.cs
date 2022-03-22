@@ -17,6 +17,7 @@ namespace SneakersShop.Controllers
         public IActionResult Index()
         {
             var totalSneakers = this.data.Sneakers.Count();
+            var totalUsers = this.data.Users.Count();
 
             var sneakers = this.data
                 .Sneakers
@@ -36,6 +37,7 @@ namespace SneakersShop.Controllers
             return View(new IndexViewModel
             {
                 TotalSneakers = totalSneakers,
+                TotalUsers = totalUsers,
                 Sneakers = sneakers
             });
         }
