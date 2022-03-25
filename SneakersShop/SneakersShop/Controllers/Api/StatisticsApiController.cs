@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SneakersShop.Data;
-using SneakersShop.Models.Api.Statistics;
+using SneakersShop.Services.Statistics;
 
 namespace SneakersShop.Controllers.Api
 {
@@ -8,22 +8,13 @@ namespace SneakersShop.Controllers.Api
     [Route("api/statistics")]
     public class StatisticsApiController : ControllerBase
     {
-        private readonly SneakersShopDbContext data;
+        private readonly IStatisticsService statistics;
 
-        public StatisticsApiController(SneakersShopDbContext data)
-            => this.data = data;
+        public StatisticsApiController(IStatisticsService statistics)
+            => this.statistics = statistics;
 
         [HttpGet]
-        public StatisticResponseModel GetStatistics()
-        {
-            var totalSneakers = this.data.Sneakers.Count();
-            var totalUsers = this.data.Users.Count();
-            return new StatisticResponseModel
-            {
-                TotalSneakers = totalSneakers,
-                TotalUsers = totalUsers,
-                TotalPurchases = 0
-            };
-        }
+        public StatisticsServiceModel GetStatistics()
+            => this.statistics.Total();
     }
 }

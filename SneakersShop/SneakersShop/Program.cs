@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SneakersShop.Data;
 using SneakersShop.Infrastructure;
+using SneakersShop.Services.Sneakers;
+using SneakersShop.Services.Statistics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
 })
     .AddEntityFrameworkStores<SneakersShopDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IStatisticsService, StatisticsService>();
+builder.Services.AddTransient<ISneakersService, SneakersService>();
 
 var app = builder.Build();
 

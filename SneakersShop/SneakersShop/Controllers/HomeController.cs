@@ -3,22 +3,26 @@ using SneakersShop.Data;
 using SneakersShop.Models;
 using SneakersShop.Models.Home;
 using SneakersShop.Models.Sneakers;
+using SneakersShop.Services.Statistics;
 using System.Diagnostics;
 
 namespace SneakersShop.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IStatisticsService statistics;
         private readonly SneakersShopDbContext data;
 
-        public HomeController(SneakersShopDbContext data)
-            => this.data = data;
+        public HomeController(
+            IStatisticsService statistics,
+            SneakersShopDbContext data)
+        {
+            this.statistics = statistics;
+            this.data = data;
+        }
 
         public IActionResult Index()
         {
-            var totalSneakers = this.data.Sneakers.Count();
-            var totalUsers = this.data.Users.Count();
-
             var sneakers = this.data
                 .Sneakers
                 .OrderByDescending(s => s.Id)
@@ -34,10 +38,12 @@ namespace SneakersShop.Controllers
                 .Take(3)
                 .ToList();
 
+            var totalStatistics = this.statistics.Total();
+
             return View(new IndexViewModel
             {
-                TotalSneakers = totalSneakers,
-                TotalUsers = totalUsers,
+                TotalSneakers = totalStatistics.TotalSneakers,
+                TotalUsers = totalStatistics.TotalUsers,
                 Sneakers = sneakers
             });
         }

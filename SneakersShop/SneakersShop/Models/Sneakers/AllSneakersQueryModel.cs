@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SneakersShop.Services.Sneakers;
+using System.ComponentModel.DataAnnotations;
 
 namespace SneakersShop.Models.Sneakers
 {
@@ -19,6 +20,6 @@ namespace SneakersShop.Models.Sneakers
 
         public IEnumerable<string> Brands { get; set; }
 
-        public IEnumerable<SneakersListingViewModel> Sneakers { get; set; }
+        public IEnumerable<SneakersServiceModel> Sneakers { get; set; }
     }
 }

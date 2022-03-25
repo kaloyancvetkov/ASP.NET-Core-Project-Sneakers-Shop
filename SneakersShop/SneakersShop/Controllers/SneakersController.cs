@@ -2,65 +2,34 @@
 using SneakersShop.Data;
 using SneakersShop.Data.Models;
 using SneakersShop.Models.Sneakers;
+using SneakersShop.Services.Sneakers;
 
 namespace TShirtsShop.Controllers
 {
     public class SneakersController : Controller
     {
         private readonly SneakersShopDbContext data;
+        private readonly ISneakersService sneakers;
 
-        public SneakersController(SneakersShopDbContext data) => this.data = data;
+        public SneakersController(SneakersShopDbContext data, ISneakersService sneakers)
+        {
+            this.sneakers = sneakers;
+            this.data = data;
+        }
 
         public IActionResult All([FromQuery]AllSneakersQueryModel query)
         {
-            var sneakersQuery = this.data.Sneakers.AsQueryable();
+            var queryResult = this.sneakers.All(query.Brand, 
+                query.SearchTerm, 
+                query.Sorting, 
+                query.CurrentPage, 
+                AllSneakersQueryModel.SneakersPerPage);
 
-            if (!string.IsNullOrWhiteSpace(query.Brand))
-            {
-                sneakersQuery = sneakersQuery.Where(s => s.Brand == query.Brand);
-            }
+            var sneakersBrands = this.sneakers.AllSneakersBrands();
 
-            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
-            {
-                sneakersQuery = sneakersQuery.Where(s =>
-                (s.Brand + " " + s.Model).ToLower().Contains(query.SearchTerm.ToLower())
-                || s.Description.ToLower().Contains(query.SearchTerm.ToLower()));
-            }
-
-            sneakersQuery = query.Sorting switch
-            {
-                SneakersSorting.Price => sneakersQuery.OrderByDescending(s => s.Price),
-                SneakersSorting.BrandAndModel => sneakersQuery.OrderBy(s => s.Brand).ThenBy(s => s.Model),
-                SneakersSorting.ReleaseDate or _ => sneakersQuery.OrderByDescending(s => s.Id)
-            };
-
-            var totalSneakers = sneakersQuery.Count();
-
-            var sneakers = sneakersQuery
-                .Skip((query.CurrentPage - 1) * AllSneakersQueryModel.SneakersPerPage)
-                .Take(AllSneakersQueryModel.SneakersPerPage)
-                .Select(s => new SneakersListingViewModel
-                {
-                    Id = s.Id,
-                    Brand = s.Brand,
-                    Model = s.Model,
-                    Color = s.Color,
-                    Price = s.Price,
-                    ImageUrl = s.ImageUrl,
-                    Category = s.Category.Name
-                })
-                .ToList();
-
-            var sneakersBrands = this.data
-                .Sneakers
-                .Select(s => s.Brand)
-                .Distinct()
-                .OrderBy(s => s)
-                .ToList();
-
-            query.TotalSneakers = totalSneakers;
+            query.TotalSneakers = queryResult.TotalSneakers;
             query.Brands = sneakersBrands;
-            query.Sneakers = sneakers;
+            query.Sneakers = queryResult.Sneakers;
 
             return View(query);
         }

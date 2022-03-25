@@ -1,6 +1,6 @@
-﻿namespace SneakersShop.Models.Api.Statistics
+﻿namespace SneakersShop.Services.Statistics
 {
-    public class StatisticResponseModel
+    public class StatisticsServiceModel
     {
         public int TotalSneakers { get; init; }
 
