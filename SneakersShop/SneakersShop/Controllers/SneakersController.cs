@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SneakersShop.Controllers;
 using SneakersShop.Data;
 using SneakersShop.Data.Models;
+using SneakersShop.Infrastructure;
 using SneakersShop.Models.Sneakers;
 using SneakersShop.Services.Sneakers;
+using System.Security.Claims;
 
 namespace TShirtsShop.Controllers
 {
@@ -17,12 +21,12 @@ namespace TShirtsShop.Controllers
             this.data = data;
         }
 
-        public IActionResult All([FromQuery]AllSneakersQueryModel query)
+        public IActionResult All([FromQuery] AllSneakersQueryModel query)
         {
-            var queryResult = this.sneakers.All(query.Brand, 
-                query.SearchTerm, 
-                query.Sorting, 
-                query.CurrentPage, 
+            var queryResult = this.sneakers.All(query.Brand,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
                 AllSneakersQueryModel.SneakersPerPage);
 
             var sneakersBrands = this.sneakers.AllSneakersBrands();
@@ -34,14 +38,35 @@ namespace TShirtsShop.Controllers
             return View(query);
         }
 
-        public IActionResult Add() => View(new AddSneakersFormModel
+        [Authorize]
+        public IActionResult Add()
         {
-            Categories = this.GetSneakersCategories()
-        });
+            if (!this.UserIsSeller())
+            {
+                return RedirectToAction(nameof(SellersController.Become), "Sellers");
+            }
 
+            return View(new AddSneakersFormModel
+            {
+                Categories = this.GetSneakersCategories()
+            });
+        }
+
+        [Authorize]
         [HttpPost]
         public IActionResult Add(AddSneakersFormModel sneakers)
         {
+            var sellerId = this.data
+                .Sellers
+                .Where(s => s.UserId == this.User.GetId())
+                .Select(s => s.Id)
+                .FirstOrDefault();
+
+            if (sellerId == 0)
+            {
+                return RedirectToAction(nameof(SellersController.Become), "Sellers");
+            }
+
             if (!this.data.Categories.Any(c => c.Id == sneakers.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(sneakers.CategoryId), "Category does not exist.");
@@ -55,7 +80,7 @@ namespace TShirtsShop.Controllers
 
                 return View(sneakers);
             }
-            
+
             var sneakersData = new Sneakers
             {
                 Brand = sneakers.Brand,
@@ -65,6 +90,7 @@ namespace TShirtsShop.Controllers
                 ImageUrl = sneakers.ImageUrl,
                 Price = sneakers.Price,
                 CategoryId = sneakers.CategoryId,
+                SellerId = sellerId
             };
 
             this.data.Sneakers.Add(sneakersData);
@@ -72,6 +98,11 @@ namespace TShirtsShop.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        private bool UserIsSeller()
+            => this.data
+            .Sellers
+            .Any(s => s.UserId == this.User.GetId());
 
         private IEnumerable<SneakersCategoryViewModel> GetSneakersCategories()
             => this.data

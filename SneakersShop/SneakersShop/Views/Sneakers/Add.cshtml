@@ -1,12 +1,12 @@
 ﻿@model AddSneakersFormModel
 
 @{
-    ViewData["Title"] = "Sneakers Shop";
+    ViewBag.Title = "Add Sneakers";
 }
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <h2 class="heading-margin text-center">Add Sneakers</h2>
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
 
         <div asp-validation-summary="All"></div>
 

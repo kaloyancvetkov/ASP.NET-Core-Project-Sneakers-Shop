@@ -1,7 +1,7 @@
 ﻿@model AllSneakersQueryModel
 
 @{
-    ViewData["Title"] = "All Sneakers";
+    ViewBag.Title = "All Sneakers";
 }
 
 <form method="get">
@@ -66,6 +66,11 @@
 
 <div class="mb-3"></div>
 
+
+@if (!Model.Sneakers.Any())
+{
+    <h2 class="text-center">No sneakers found by the given criteria!</h2>
+}
 
 <div class="row">
     @foreach (var sneakers in Model.Sneakers)
