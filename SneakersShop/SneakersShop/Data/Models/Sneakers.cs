@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static SneakersShop.Data.DataConstants;
+using static SneakersShop.Data.DataConstants.Sneakers;
 
 namespace SneakersShop.Data.Models
 {
@@ -8,11 +8,11 @@ namespace SneakersShop.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(SneakersBrandMaxLength)]
+        [MaxLength(BrandMaxLength)]
         public string Brand { get; set; }
 
         [Required]
-        [MaxLength(SneakersModelMaxLength)]
+        [MaxLength(ModelMaxLength)]
         public string Model { get; set; }
 
         [Required]
@@ -22,12 +22,15 @@ namespace SneakersShop.Data.Models
         public string ImageUrl { get; set; }
 
         [Required]
-        [MaxLength(SneakersColorMaxLength)]
+        [MaxLength(ColorMaxLength)]
         public string Color { get; set; }
 
         public decimal Price { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; init; }
+
+        public int SellerId { get; init; }
+        public Seller Seller { get; init; }
     }
 }

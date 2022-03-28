@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
-using static SneakersShop.Data.DataConstants;
+using static SneakersShop.Data.DataConstants.Sneakers;
 
 
 namespace SneakersShop.Models.Sneakers
@@ -9,15 +9,15 @@ namespace SneakersShop.Models.Sneakers
     public class AddSneakersFormModel
     {
         [Required]
-        [StringLength(SneakersBrandMaxLength, MinimumLength = SneakersBrandMinLength)]
+        [StringLength(BrandMaxLength, MinimumLength = BrandMinLength)]
         public string Brand { get; init; }
 
         [Required]
-        [StringLength(SneakersModelMaxLength, MinimumLength = SneakersModelMinLength)]
+        [StringLength(ModelMaxLength, MinimumLength = ModelMinLength)]
         public string Model { get; init; }
 
         [Required]
-        [StringLength(int.MaxValue, MinimumLength = SneakersDescriptionMinLength, ErrorMessage = "The field Description must be a string with a minimum length of {2}")]
+        [StringLength(int.MaxValue, MinimumLength = DescriptionMinLength, ErrorMessage = "The field Description must be a string with a minimum length of {2}")]
         public string Description { get; init; }
 
         [Required]
@@ -26,8 +26,8 @@ namespace SneakersShop.Models.Sneakers
         public string ImageUrl { get; init; }
 
         [Required]
-        [MinLength(SneakersColorMinLength)]
-        [MaxLength(SneakersColorMaxLength)]
+        [MinLength(ColorMinLength)]
+        [MaxLength(ColorMaxLength)]
         public string Color { get; init; }
 
         [Range(0, 25000.99)]
