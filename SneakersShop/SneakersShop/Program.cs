@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SneakersShop.Data;
 using SneakersShop.Infrastructure;
+using SneakersShop.Services.Sellers;
 using SneakersShop.Services.Sneakers;
 using SneakersShop.Services.Statistics;
 
@@ -28,7 +29,8 @@ builder.Services.AddControllersWithViews(options =>
 });
 
 builder.Services.AddTransient<IStatisticsService, StatisticsService>();
-builder.Services.AddTransient<ISneakersService, SneakersService>();
+builder.Services.AddTransient<ISneakerService, SneakerService>();
+builder.Services.AddTransient<ISellerService, SellerService>();
 
 var app = builder.Build();
 

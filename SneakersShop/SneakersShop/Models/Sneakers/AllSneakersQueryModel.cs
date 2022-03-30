@@ -20,6 +20,6 @@ namespace SneakersShop.Models.Sneakers
 
         public IEnumerable<string> Brands { get; set; }
 
-        public IEnumerable<SneakersServiceModel> Sneakers { get; set; }
+        public IEnumerable<SneakerServiceModel> Sneakers { get; set; }
     }
 }

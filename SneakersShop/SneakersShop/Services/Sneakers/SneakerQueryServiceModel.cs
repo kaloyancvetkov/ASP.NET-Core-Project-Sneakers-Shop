@@ -1,6 +1,6 @@
 ﻿namespace SneakersShop.Services.Sneakers
 {
-    public class SneakersQueryServiceModel
+    public class SneakerQueryServiceModel
     {
         public int CurrentPage { get; init; }
 
@@ -8,6 +8,6 @@
 
         public int TotalSneakers { get; set; }
 
-        public IEnumerable<SneakersServiceModel> Sneakers { get; init; }
+        public IEnumerable<SneakerServiceModel> Sneakers { get; init; }
     }
 }

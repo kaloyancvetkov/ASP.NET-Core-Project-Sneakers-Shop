@@ -12,6 +12,6 @@ namespace SneakersShop.Data.Models
         [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
-        public IEnumerable<Sneakers> Sneakers { get; init; } = new List<Sneakers>();
+        public IEnumerable<Sneaker> Sneakers { get; init; } = new List<Sneaker>();
     }
 }

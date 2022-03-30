@@ -72,20 +72,5 @@
     <h2 class="text-center">No sneakers found by the given criteria!</h2>
 }
 
-<div class="row">
-    @foreach (var sneakers in Model.Sneakers)
-    {
-        <div class="col-md-4">
-            <div class="card mb-5">
-                <img data-sizes="auto" src="@sneakers.ImageUrl" class="card-img-top" alt="@sneakers.Brand @sneakers.Model @sneakers.Color - @sneakers.Price (@sneakers.Category)">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-center">@sneakers.Brand @sneakers.Model (@sneakers.Color)</h5>
-                    <a asp-controller="Sneakers" asp-action="Details" asp-route-id="@sneakers.Id" class="btn btn-primary">View More Details</a>
-                </div>
-            </div>
-        </div>
-
-    }
-
-</div>
+<partial name="_SneakersPartial" model="@Model.Sneakers" />
 

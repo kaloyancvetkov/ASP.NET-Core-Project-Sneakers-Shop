@@ -17,6 +17,6 @@ namespace SneakersShop.Data.Models
         [Required]
         public string UserId { get; set; }
 
-        public IEnumerable<Sneakers> Sneakers { get; init; } = new List<Sneakers>();
+        public IEnumerable<Sneaker> Sneakers { get; init; } = new List<Sneaker>();
     }
 }

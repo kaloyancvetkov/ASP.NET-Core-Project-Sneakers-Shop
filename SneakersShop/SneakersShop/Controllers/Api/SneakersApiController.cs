@@ -10,13 +10,13 @@ namespace SneakersShop.Controllers.Api
     [Route("api/sneakers")]
     public class SneakersApiController : ControllerBase
     {
-        private readonly ISneakersService sneakers;
+        private readonly ISneakerService sneakers;
 
-        public SneakersApiController(ISneakersService sneakers)
+        public SneakersApiController(ISneakerService sneakers)
             => this.sneakers = sneakers;
 
         [HttpGet]
-        public SneakersQueryServiceModel All([FromQuery] AllSneakersApiRequestModel query)
+        public SneakerQueryServiceModel All([FromQuery] AllSneakersApiRequestModel query)
             => this.sneakers.All(
                 query.Brand,
                 query.SearchTerm,

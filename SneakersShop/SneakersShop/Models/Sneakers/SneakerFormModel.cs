@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static SneakersShop.Data.DataConstants.Sneakers;
+using SneakersShop.Services.Sneakers;
 
 
 namespace SneakersShop.Models.Sneakers
 {
 
-    public class AddSneakersFormModel
+    public class SneakerFormModel
     {
         [Required]
         [StringLength(BrandMaxLength, MinimumLength = BrandMinLength)]
@@ -36,6 +36,6 @@ namespace SneakersShop.Models.Sneakers
         [Display(Name = "Category")]
         public int CategoryId { get; init; }
 
-        public IEnumerable<SneakersCategoryViewModel> ?Categories { get; set; }
+        public IEnumerable<SneakerCategoryServiceModel> ?Categories { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace SneakersShop.Models.Sneakers
+﻿namespace SneakersShop.Services.Sneakers
 {
-    public class SneakersCategoryViewModel
+    public class SneakerCategoryServiceModel
     {
         public int Id { get; init; }
 

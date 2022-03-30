@@ -14,7 +14,7 @@ namespace SneakersShop.Data
         {
         }
 
-        public DbSet<Sneakers> Sneakers { get; init; }
+        public DbSet<Sneaker> Sneakers { get; init; }
 
         public DbSet<Category> Categories { get; init; }
 
@@ -22,13 +22,13 @@ namespace SneakersShop.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Sneakers>()
+            builder.Entity<Sneaker>()
                 .HasOne(c => c.Category)
                 .WithMany(t => t.Sneakers)
                 .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Sneakers>()
+            builder.Entity<Sneaker>()
                 .HasOne(s => s.Seller)
                 .WithMany(s => s.Sneakers)
                 .HasForeignKey(s => s.SellerId)

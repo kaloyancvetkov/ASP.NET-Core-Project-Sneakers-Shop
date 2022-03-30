@@ -3,7 +3,7 @@ using static SneakersShop.Data.DataConstants.Sneakers;
 
 namespace SneakersShop.Data.Models
 {
-    public class Sneakers
+    public class Sneaker
     {
         public int Id { get; set; }
 

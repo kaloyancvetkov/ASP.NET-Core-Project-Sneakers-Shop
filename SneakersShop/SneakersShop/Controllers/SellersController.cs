@@ -21,7 +21,7 @@ namespace SneakersShop.Controllers
         [Authorize]
         public IActionResult Become(BecomeSellerFormModel seller)
         {
-            var userId = this.User.GetId();
+            var userId = this.User.Id();
 
             var userIsAlreadySeller = this.data
                 .Sellers

@@ -1,6 +1,6 @@
 ﻿namespace SneakersShop.Services.Sneakers
 {
-    public class SneakersServiceModel
+    public class SneakerServiceModel
     {
         public int Id { get; init; }
 
@@ -14,6 +14,6 @@
 
         public decimal Price { get; init; }
 
-        public string Category { get; init; }
+        public string CategoryName { get; init; }
     }
 }
