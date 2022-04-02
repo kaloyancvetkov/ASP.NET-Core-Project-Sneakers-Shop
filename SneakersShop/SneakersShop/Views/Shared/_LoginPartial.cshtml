@@ -11,14 +11,15 @@
 
         var userId = User.Id();
         var userIsSeller = Sellers.IsSeller(userId);
+        var userIsAdmin = User.IsAdmin();
 
-        @if (userIsSeller)
+        @if (userIsSeller && !userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Sneakers" asp-action="Mine">My Sneakers</a>
             </li>
         }
-        else
+        else if (!userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Sellers" asp-action="Become">Become Seller</a>

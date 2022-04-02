@@ -2,6 +2,11 @@
 {
     public class DataConstants
     {
+        public class User
+        {
+            public const int PasswordMaxLength = 100;
+            public const int PasswordMinLength = 6;
+        }
         public class Sneakers
         {
             public const int BrandMaxLength = 20;

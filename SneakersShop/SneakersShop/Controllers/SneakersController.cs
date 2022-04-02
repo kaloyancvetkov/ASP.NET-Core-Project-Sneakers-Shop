@@ -101,14 +101,14 @@ namespace TShirtsShop.Controllers
         {
             var userId = this.User.Id();
 
-            if (!this.sellers.IsSeller(userId))
+            if (!this.sellers.IsSeller(userId) && !User.IsAdmin())
             {
                 return RedirectToAction(nameof(SellersController.Become), "Sellers");
             }
 
             var sneaker = this.sneakers.Details(id);
 
-            if (sneaker.UserId != userId)
+            if (sneaker.UserId != userId && !User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -132,7 +132,7 @@ namespace TShirtsShop.Controllers
         {
             var sellerId = this.sellers.IdByUser(this.User.Id());
 
-            if (sellerId == 0)
+            if (sellerId == 0 && !User.IsAdmin())
             {
                 return RedirectToAction(nameof(SellersController.Become), "Sellers");
             }
@@ -151,7 +151,7 @@ namespace TShirtsShop.Controllers
                 return View(sneakers);
             }
 
-            if (!this.sneakers.IsBySeller(id, sellerId))
+            if (!this.sneakers.IsBySeller(id, sellerId) && !User.IsAdmin())
             {
                 return BadRequest();
             }

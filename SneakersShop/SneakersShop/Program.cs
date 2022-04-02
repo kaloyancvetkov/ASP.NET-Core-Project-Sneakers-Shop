@@ -9,7 +9,6 @@ using SneakersShop.Services.Statistics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<SneakersShopDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -22,6 +21,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<SneakersShopDbContext>();
 builder.Services.AddControllersWithViews(options =>
 {
@@ -57,7 +57,7 @@ app.UseHttpsRedirection().
         endpoints.MapDefaultControllerRoute();
         endpoints.MapRazorPages();
     });
-
+app.UseAuthentication();
 
 
 
