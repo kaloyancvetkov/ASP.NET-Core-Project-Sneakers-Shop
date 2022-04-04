@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using static SneakersShop.Areas.Admin.AdminConstants;
 
 namespace SneakersShop.Infrastructure
 {
@@ -8,6 +9,6 @@ namespace SneakersShop.Infrastructure
             => user.FindFirst(ClaimTypes.NameIdentifier).Value;
 
         public static bool IsAdmin(this ClaimsPrincipal user)
-            => user.IsInRole(WebConstants.AdministratorRoleName);
+            => user.IsInRole(AdministratorRoleName);
     }
 }

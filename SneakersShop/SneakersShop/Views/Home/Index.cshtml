@@ -23,11 +23,11 @@
     <div class="carousel-inner">
         @for (int i = 0; i < Model.Sneakers.Count; i++)
         {
-            var sneakers = Model.Sneakers[i];
+            var sneaker = Model.Sneakers[i];
             <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img width="400" height="150" src="@sneakers.ImageUrl" alt="@sneakers.Brand @sneakers.Model">
+                <img class="d-block w-100" src="@sneaker.ImageUrl" alt="@sneaker.Brand @sneaker.Model">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: black">@sneakers.Brand @sneakers.Model - @sneakers.Color</h5>
+                    <h5><a class="btn btn-primary" asp-controller="Sneakers" asp-action="Details" asp-route-id="@sneaker.Id">@sneaker.Brand @sneaker.Model (@sneaker.Color)</a></h5>
                 </div>
             </div>
         }
@@ -63,6 +63,9 @@
 
 @section Scripts {
     <script>
+        document.getElementById("total-sneakers").style.color = "#FFFFFF";
+        document.getElementById("total-users").style.color = "#FFFFFF";
+        document.getElementById("total-purchases").style.color = "#FFFFFF";
         $('#statistics-button').on('click', ev => {
             $.get('/api/statistics', (data) => {
             $('#total-sneakers').text(data.totalSneakers + " Sneakers");

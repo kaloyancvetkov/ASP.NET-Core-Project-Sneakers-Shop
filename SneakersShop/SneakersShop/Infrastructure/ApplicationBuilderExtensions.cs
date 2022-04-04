@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SneakersShop.Data;
 using SneakersShop.Data.Models;
-using static SneakersShop.WebConstants;
+using static SneakersShop.Areas.Admin.AdminConstants;
 
 namespace SneakersShop.Infrastructure
 {
