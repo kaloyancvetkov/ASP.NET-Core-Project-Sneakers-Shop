@@ -3,6 +3,7 @@ using SneakersShop.Controllers.Api.Sneakers;
 using SneakersShop.Data;
 using SneakersShop.Models.Sneakers;
 using SneakersShop.Services.Sneakers;
+using SneakersShop.Services.Sneakers.Models;
 
 namespace SneakersShop.Controllers.Api
 {

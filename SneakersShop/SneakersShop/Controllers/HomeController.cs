@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using SneakersShop.Data;
 using SneakersShop.Models;
 using SneakersShop.Models.Home;
@@ -12,13 +14,15 @@ namespace SneakersShop.Controllers
     {
         private readonly IStatisticsService statistics;
         private readonly SneakersShopDbContext data;
+        private readonly IMapper mapper;
 
         public HomeController(
             IStatisticsService statistics,
-            SneakersShopDbContext data)
+            SneakersShopDbContext data, IMapper mapper)
         {
             this.statistics = statistics;
             this.data = data;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -26,15 +30,7 @@ namespace SneakersShop.Controllers
             var sneakers = this.data
                 .Sneakers
                 .OrderByDescending(s => s.Id)
-                .Select(s => new SneakersIndexViewModel
-                {
-                    Id = s.Id,
-                    Brand = s.Brand,
-                    Model = s.Model,
-                    Color = s.Color,
-                    Price = s.Price,
-                    ImageUrl = s.ImageUrl,
-                })
+                .ProjectTo<SneakersIndexViewModel>(this.mapper.ConfigurationProvider)
                 .Take(3)
                 .ToList();
 

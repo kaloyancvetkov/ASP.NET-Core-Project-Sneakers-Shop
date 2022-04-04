@@ -1,4 +1,5 @@
 ﻿using SneakersShop.Services.Sneakers;
+using SneakersShop.Services.Sneakers.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace SneakersShop.Models.Sneakers

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SneakersShop.Controllers;
 using SneakersShop.Infrastructure;
@@ -12,11 +13,13 @@ namespace TShirtsShop.Controllers
     {
         private readonly ISellerService sellers;
         private readonly ISneakerService sneakers;
+        private readonly IMapper mapper;
 
-        public SneakersController(ISellerService sellers, ISneakerService sneakers)
+        public SneakersController(ISellerService sellers, ISneakerService sneakers, IMapper mapper)
         {
             this.sneakers = sneakers;
             this.sellers = sellers;
+            this.mapper = mapper;
         }
 
         public IActionResult All([FromQuery] AllSneakersQueryModel query)
@@ -113,17 +116,11 @@ namespace TShirtsShop.Controllers
                 return Unauthorized();
             }
 
-            return View(new SneakerFormModel
-            {
-                Brand = sneaker.Brand,
-                Model = sneaker.Model,
-                Description = sneaker.Description,
-                ImageUrl = sneaker.ImageUrl,
-                Color = sneaker.Color,
-                Price = sneaker.Price,
-                CategoryId = sneaker.CategoryId,
-                Categories = this.sneakers.AllCategories()
-            });
+            var sneakerForm = this.mapper.Map<SneakerFormModel>(sneaker);
+
+            sneakerForm.Categories = this.sneakers.AllCategories();
+
+            return View(sneakerForm);
         }
 
         [HttpPost]

@@ -1,15 +1,22 @@
 ﻿using SneakersShop.Data;
 using SneakersShop.Models.Sneakers;
 using SneakersShop.Data.Models;
+using SneakersShop.Services.Sneakers.Models;
+using AutoMapper.QueryableExtensions;
+using AutoMapper;
 
 namespace SneakersShop.Services.Sneakers
 {
     public class SneakerService : ISneakerService
     {
         private readonly SneakersShopDbContext data;
+        private readonly IMapper mapper;
 
-        public SneakerService(SneakersShopDbContext data)
-            => this.data = data;
+        public SneakerService(SneakersShopDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public SneakerQueryServiceModel All(string brand, string searchTerm, SneakersSorting sorting, int currentPage, int sneakersPerPage)
         {
@@ -131,19 +138,7 @@ namespace SneakersShop.Services.Sneakers
             => this.data
             .Sneakers
             .Where(s => s.Id == id)
-            .Select(s => new SneakerDetailsServiceModel
-            {
-                Id = s.Id,
-                Brand = s.Brand,
-                Model = s.Model,
-                Description = s.Description,
-                Price = s.Price,
-                ImageUrl = s.ImageUrl,
-                CategoryName = s.Category.Name,
-                SellerId = s.SellerId,
-                SellerName = s.Seller.Name,
-                UserId = s.Seller.UserId
-            })
+            .ProjectTo<SneakerDetailsServiceModel>(this.mapper.ConfigurationProvider)
             .FirstOrDefault();
 
         private IEnumerable<SneakerServiceModel> GetSneakers(IQueryable<Sneaker> sneakersQuery)

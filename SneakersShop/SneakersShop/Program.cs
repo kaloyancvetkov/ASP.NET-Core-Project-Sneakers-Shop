@@ -23,10 +23,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<SneakersShopDbContext>();
+
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddTransient<IStatisticsService, StatisticsService>();
 builder.Services.AddTransient<ISneakerService, SneakerService>();

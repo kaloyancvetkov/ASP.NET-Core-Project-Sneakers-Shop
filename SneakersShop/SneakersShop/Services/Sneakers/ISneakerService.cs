@@ -1,4 +1,5 @@
 ﻿using SneakersShop.Models.Sneakers;
+using SneakersShop.Services.Sneakers.Models;
 
 namespace SneakersShop.Services.Sneakers
 {

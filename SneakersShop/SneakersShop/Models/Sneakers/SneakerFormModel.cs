@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static SneakersShop.Data.DataConstants.Sneakers;
 using SneakersShop.Services.Sneakers;
-
+using SneakersShop.Services.Sneakers.Models;
 
 namespace SneakersShop.Models.Sneakers
 {

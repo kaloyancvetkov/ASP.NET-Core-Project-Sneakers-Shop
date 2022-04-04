@@ -1,4 +1,4 @@
-﻿namespace SneakersShop.Services.Sneakers
+﻿namespace SneakersShop.Services.Sneakers.Models
 {
     public class SneakerCategoryServiceModel
     {
