@@ -11,7 +11,7 @@ namespace SneakersShop.Infrastructure
         public MappingProfile()
         {
             this.CreateMap<SneakerDetailsServiceModel, SneakerFormModel>();
-            this.CreateMap<Sneaker, SneakersIndexViewModel>();
+            this.CreateMap<Sneaker, LatestSneakerServiceModel>();
             this.CreateMap<Sneaker, SneakerDetailsServiceModel>()
                 .ForMember(s => s.UserId, cfg => cfg.MapFrom(s => s.Seller.UserId));
         }

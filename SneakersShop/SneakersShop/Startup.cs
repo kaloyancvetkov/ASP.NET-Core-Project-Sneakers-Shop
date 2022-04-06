@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SneakersShop.Data;
+using SneakersShop.Data.Models;
 using SneakersShop.Infrastructure;
 using SneakersShop.Services.Sellers;
 using SneakersShop.Services.Sneakers;
@@ -14,7 +15,7 @@ builder.Services.AddDbContext<SneakersShopDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+builder.Services.AddDefaultIdentity<User>(options => {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -63,8 +64,4 @@ endpoints.MapDefaultControllerRoute();
     });
 app.UseAuthentication();
 
-
-
 app.Run();
-
-

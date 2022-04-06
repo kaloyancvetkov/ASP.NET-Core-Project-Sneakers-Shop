@@ -8,6 +8,6 @@
 
         public int TotalPurchases { get; init; }
 
-        public List<SneakersIndexViewModel> Sneakers { get; init; }
+        public IList<LatestSneakerServiceModel> Sneakers { get; init; }
     }
 }

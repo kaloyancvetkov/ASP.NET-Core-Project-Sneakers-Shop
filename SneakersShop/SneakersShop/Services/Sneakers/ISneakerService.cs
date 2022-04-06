@@ -1,4 +1,5 @@
-﻿using SneakersShop.Models.Sneakers;
+﻿using SneakersShop.Models.Home;
+using SneakersShop.Models.Sneakers;
 using SneakersShop.Services.Sneakers.Models;
 
 namespace SneakersShop.Services.Sneakers
@@ -6,6 +7,8 @@ namespace SneakersShop.Services.Sneakers
     public interface ISneakerService
     {
         SneakerQueryServiceModel All(string brand, string searchTerm, SneakersSorting sorting, int currentPage, int sneakersPerPage);
+
+        IEnumerable<LatestSneakerServiceModel> Latest();
 
         SneakerDetailsServiceModel Details(int sneakerId);
 

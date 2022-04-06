@@ -4,6 +4,7 @@ using SneakersShop.Data.Models;
 using SneakersShop.Services.Sneakers.Models;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using SneakersShop.Models.Home;
 
 namespace SneakersShop.Services.Sneakers
 {
@@ -122,8 +123,8 @@ namespace SneakersShop.Services.Sneakers
             }
 
             sneakerData.Brand = brand;
-                sneakerData.Model = model;
-                sneakerData.Color = color;
+            sneakerData.Model = model;
+            sneakerData.Color = color;
             sneakerData.Description = description;
             sneakerData.ImageUrl = imageUrl;
             sneakerData.Price = price;
@@ -154,5 +155,13 @@ namespace SneakersShop.Services.Sneakers
                 CategoryName = s.Category.Name
             })
             .ToList();
+
+        public IEnumerable<LatestSneakerServiceModel> Latest()
+            => this.data
+                .Sneakers
+                .OrderByDescending(s => s.Id)
+                .ProjectTo<LatestSneakerServiceModel>(this.mapper.ConfigurationProvider)
+                .Take(3)
+                .ToList();
     }
 }
