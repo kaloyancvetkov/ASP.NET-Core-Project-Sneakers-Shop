@@ -15,7 +15,7 @@ builder.Services.AddDbContext<SneakersShopDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => {
+builder.Services.AddDefaultIdentity<IdentityUser>(options => {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -24,6 +24,8 @@ builder.Services.AddDefaultIdentity<User>(options => {
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<SneakersShopDbContext>();
+
+builder.Services.AddMemoryCache();
 
 builder.Services.AddControllersWithViews(options =>
 {

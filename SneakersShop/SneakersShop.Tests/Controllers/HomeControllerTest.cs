@@ -6,8 +6,6 @@ using SneakersShop.Models.Home;
 using SneakersShop.Services.Sneakers;
 using SneakersShop.Services.Statistics;
 using SneakersShop.Tests.Mocks;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace SneakersShop.Tests.Controller
@@ -29,13 +27,13 @@ namespace SneakersShop.Tests.Controller
                 Description = "just something",
                 ImageUrl = "some link for nike"
             });
-            data.Add(new User());
+            data.Add(new IdentityUser());
             data.SaveChanges();
 
             var sneakerService = new SneakerService(data, mapper);
             var statisticsService = new StatisticsService(data);
 
-            var homeController = new HomeController(statisticsService, sneakerService);
+            var homeController = new HomeController(statisticsService, sneakerService, null);
 
             //Act
             var result = homeController.Index();
@@ -57,7 +55,7 @@ namespace SneakersShop.Tests.Controller
         public void ErrorShouldReturnView()
         {
             //Arrange
-            var homeController = new HomeController(null, null);
+            var homeController = new HomeController(null, null, null);
 
             //Act
             var result = homeController.Error();
