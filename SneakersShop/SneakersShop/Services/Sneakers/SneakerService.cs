@@ -4,7 +4,6 @@ using SneakersShop.Data.Models;
 using SneakersShop.Services.Sneakers.Models;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
-using SneakersShop.Models.Home;
 
 namespace SneakersShop.Services.Sneakers
 {
@@ -19,9 +18,15 @@ namespace SneakersShop.Services.Sneakers
             this.mapper = mapper;
         }
 
-        public SneakerQueryServiceModel All(string brand, string searchTerm, SneakersSorting sorting, int currentPage, int sneakersPerPage)
+        public SneakerQueryServiceModel All(
+            string brand = null,
+            string searchTerm = null, 
+            SneakersSorting sorting = SneakersSorting.ReleaseDate,
+            int currentPage = 1,
+            int sneakersPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
-            var sneakersQuery = this.data.Sneakers.AsQueryable();
+            var sneakersQuery = this.data.Sneakers.Where(s => !publicOnly || s.isPublic);
 
             if (!string.IsNullOrWhiteSpace(brand))
             {
@@ -68,11 +73,7 @@ namespace SneakersShop.Services.Sneakers
         public IEnumerable<SneakerCategoryServiceModel> AllCategories()
             => this.data
             .Categories
-            .Select(c => new SneakerCategoryServiceModel
-            {
-                Id = c.Id,
-                Name = c.Name,
-            })
+            .ProjectTo<SneakerCategoryServiceModel>(this.mapper.ConfigurationProvider)
             .ToList();
 
         public IEnumerable<SneakerServiceModel> ByUser(string userId)
@@ -91,8 +92,6 @@ namespace SneakersShop.Services.Sneakers
 
         public int Create(string brand, string model, string color, string description, string imageUrl, decimal price, int categoryId, int sellerId)
         {
-
-
             var sneakersData = new Sneaker
             {
                 Brand = brand,
@@ -102,7 +101,8 @@ namespace SneakersShop.Services.Sneakers
                 ImageUrl = imageUrl,
                 Price = price,
                 CategoryId = categoryId,
-                SellerId = sellerId
+                SellerId = sellerId,
+                isPublic = false
             };
 
             this.data.Sneakers.Add(sneakersData);
@@ -111,7 +111,15 @@ namespace SneakersShop.Services.Sneakers
             return sneakersData.Id;
         }
 
-        public bool Edit(int id, string brand, string model, string color, string description, string imageUrl, decimal price, int categoryId)
+        public bool Edit(int id, 
+            string brand, 
+            string model, 
+            string color, 
+            string description, 
+            string imageUrl,
+            decimal price, 
+            int categoryId,
+            bool isPublic)
         {
             var sneakerData = this.data
                 .Sneakers
@@ -129,6 +137,7 @@ namespace SneakersShop.Services.Sneakers
             sneakerData.ImageUrl = imageUrl;
             sneakerData.Price = price;
             sneakerData.CategoryId = categoryId;
+            sneakerData.isPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -144,21 +153,22 @@ namespace SneakersShop.Services.Sneakers
 
         private IEnumerable<SneakerServiceModel> GetSneakers(IQueryable<Sneaker> sneakersQuery)
             => sneakersQuery
-            .Select(s => new SneakerServiceModel
-            {
-                Id = s.Id,
-                Brand = s.Brand,
-                Model = s.Model,
-                Color = s.Color,
-                Price = s.Price,
-                ImageUrl = s.ImageUrl,
-                CategoryName = s.Category.Name
-            })
+            .ProjectTo<SneakerServiceModel>(this.mapper.ConfigurationProvider)
             .ToList();
+
+        public void ChangeVisibility(int sneakerId)
+        {
+            var sneaker = this.data.Sneakers.Find(sneakerId);
+
+            sneaker.isPublic = !sneaker.isPublic;
+
+            this.data.SaveChanges();
+        }
 
         public IEnumerable<LatestSneakerServiceModel> Latest()
             => this.data
                 .Sneakers
+            .Where(s => s.isPublic)
                 .OrderByDescending(s => s.Id)
                 .ProjectTo<LatestSneakerServiceModel>(this.mapper.ConfigurationProvider)
                 .Take(3)

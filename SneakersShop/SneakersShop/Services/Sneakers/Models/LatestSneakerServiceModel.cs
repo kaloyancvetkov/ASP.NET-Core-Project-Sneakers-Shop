@@ -1,6 +1,6 @@
-﻿namespace SneakersShop.Models.Home
+﻿namespace SneakersShop.Services.Sneakers.Models
 {
-    public class LatestSneakerServiceModel
+    public class LatestSneakerServiceModel : ISneakerModel
     {
         public int Id { get; init; }
 

@@ -6,7 +6,7 @@ using SneakersShop.Services.Sneakers.Models;
 namespace SneakersShop.Models.Sneakers
 {
 
-    public class SneakerFormModel
+    public class SneakerFormModel : ISneakerModel
     {
         [Required]
         [StringLength(BrandMaxLength, MinimumLength = BrandMinLength)]

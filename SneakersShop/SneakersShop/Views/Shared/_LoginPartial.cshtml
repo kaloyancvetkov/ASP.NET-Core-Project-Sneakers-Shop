@@ -25,6 +25,12 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Sellers" asp-action="Become">Become Seller</a>
             </li>
         }
+        else if (userIsAdmin)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Sneakers" asp-action="All">Administration</a>
+            </li>
+        }
 
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>

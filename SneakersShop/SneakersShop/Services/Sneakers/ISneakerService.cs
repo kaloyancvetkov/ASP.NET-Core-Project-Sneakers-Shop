@@ -6,7 +6,9 @@ namespace SneakersShop.Services.Sneakers
 {
     public interface ISneakerService
     {
-        SneakerQueryServiceModel All(string brand, string searchTerm, SneakersSorting sorting, int currentPage, int sneakersPerPage);
+        SneakerQueryServiceModel All(string brand = null, string searchTerm = null, SneakersSorting sorting = SneakersSorting.ReleaseDate, int currentPage = 1,
+            int sneakersPerPage = int.MaxValue,
+            bool publicOnly = true);
 
         IEnumerable<LatestSneakerServiceModel> Latest();
 
@@ -29,11 +31,14 @@ namespace SneakersShop.Services.Sneakers
                 string description,
                 string imageUrl,
                 decimal price,
-                int categoryId);
+                int categoryId,
+                bool isPublic);
 
         IEnumerable<SneakerServiceModel> ByUser(string userId);
 
         bool IsBySeller(int sneakerId, int sellerId);
+
+        void ChangeVisibility(int id);
 
         IEnumerable<string> AllBrands();
 

@@ -27,7 +27,7 @@
             <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
                 <img class="d-block w-100" src="@sneaker.ImageUrl" alt="@sneaker.Brand @sneaker.Model">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5><a class="btn btn-primary" asp-controller="Sneakers" asp-action="Details" asp-route-id="@sneaker.Id">@sneaker.Brand @sneaker.Model (@sneaker.Color)</a></h5>
+                    <h5><a class="btn btn-primary" asp-controller="Sneakers" asp-action="Details" asp-route-id="@sneaker.Id" asp-route-information="@sneaker.GetInfo()">@sneaker.Brand @sneaker.Model (@sneaker.Color)</a></h5>
                 </div>
             </div>
         }

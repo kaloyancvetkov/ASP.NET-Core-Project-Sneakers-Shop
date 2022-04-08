@@ -21,6 +21,8 @@ namespace SneakersShop.Data.Models
         [Required]
         public string ImageUrl { get; set; }
 
+        public bool isPublic { get; set; }
+
         [Required]
         [MaxLength(ColorMaxLength)]
         public string Color { get; set; }

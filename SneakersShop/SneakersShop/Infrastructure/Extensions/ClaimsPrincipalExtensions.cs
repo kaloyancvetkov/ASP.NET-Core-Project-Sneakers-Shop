@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using static SneakersShop.Areas.Admin.AdminConstants;
 
-namespace SneakersShop.Infrastructure
+namespace SneakersShop.Infrastructure.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {

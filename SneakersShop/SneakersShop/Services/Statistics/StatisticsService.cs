@@ -11,7 +11,7 @@ namespace SneakersShop.Services.Statistics
 
         public StatisticsServiceModel Total()
         {
-            var totalSneakers = this.data.Sneakers.Count();
+            var totalSneakers = this.data.Sneakers.Count(s => s.isPublic);
             var totalUsers = this.data.Users.Count();
 
             return new StatisticsServiceModel

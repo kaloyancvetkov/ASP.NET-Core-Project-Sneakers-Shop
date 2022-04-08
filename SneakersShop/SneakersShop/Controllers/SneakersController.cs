@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SneakersShop.Controllers;
-using SneakersShop.Infrastructure;
+using SneakersShop.Infrastructure.Extensions;
 using SneakersShop.Models.Sneakers;
 using SneakersShop.Services.Sellers;
 using SneakersShop.Services.Sneakers;
@@ -48,6 +48,18 @@ namespace TShirtsShop.Controllers
             return View(mySneakers);
         }
 
+        public IActionResult Details(int id, string information)
+        {
+            var sneaker = this.sneakers.Details(id);
+
+            if (information != sneaker.GetInfo())
+            {
+                return BadRequest();
+            }
+
+            return View(sneaker);
+        }
+
         [Authorize]
         public IActionResult Add()
         {
@@ -87,7 +99,7 @@ namespace TShirtsShop.Controllers
                 return View(sneakers);
             }
 
-            this.sneakers.Create(
+            var sneakerId = this.sneakers.Create(
                 sneaker.Brand,
                 sneaker.Model,
                 sneaker.Color,
@@ -97,9 +109,9 @@ namespace TShirtsShop.Controllers
                 sneaker.CategoryId,
                 sellerId);
 
-            TempData[GlobalMessageKey] = "Your sneaker was added successfully!";
+            TempData[GlobalMessageKey] = "Your sneaker was added and it is waiting for approval from the admin!";
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id = sneakerId, information = sneaker.GetInfo() });
         }
 
         [Authorize]
@@ -164,11 +176,12 @@ namespace TShirtsShop.Controllers
                 sneaker.Description,
                 sneaker.ImageUrl,
                 sneaker.Price,
-                sneaker.CategoryId);
+                sneaker.CategoryId,
+                this.User.IsAdmin());
 
-            TempData[GlobalMessageKey] = "Your sneaker was edited successfuylly!";
+            TempData[GlobalMessageKey] = $"Your sneaker was edited {(this.User.IsAdmin() ? string.Empty : " and it is awaiting for approval from the admin")}!";
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id = id, information = sneaker.GetInfo() });
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using SneakersShop.Models.Home;
 using SneakersShop.Services.Sneakers;
+using SneakersShop.Services.Sneakers.Models;
 using SneakersShop.Services.Statistics;
 
 namespace SneakersShop.Controllers

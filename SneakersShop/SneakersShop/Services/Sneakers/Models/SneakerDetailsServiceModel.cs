@@ -6,6 +6,8 @@
 
         public int CategoryId { get; init; }
 
+        public string CategoryName { get; init; }
+
         public int SellerId { get; init; }
 
         public string SellerName { get; init; }

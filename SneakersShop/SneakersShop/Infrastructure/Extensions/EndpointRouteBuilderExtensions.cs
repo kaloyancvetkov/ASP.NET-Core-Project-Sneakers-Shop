@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Routing;
 
-namespace SneakersShop.Infrastructure
+namespace SneakersShop.Infrastructure.Extensions
 {
     public static class EndpointRouteBuilderExtensions
     {

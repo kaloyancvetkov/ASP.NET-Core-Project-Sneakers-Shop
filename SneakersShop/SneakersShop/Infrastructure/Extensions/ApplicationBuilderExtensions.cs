@@ -4,7 +4,7 @@ using SneakersShop.Data;
 using SneakersShop.Data.Models;
 using static SneakersShop.Areas.Admin.AdminConstants;
 
-namespace SneakersShop.Infrastructure
+namespace SneakersShop.Infrastructure.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

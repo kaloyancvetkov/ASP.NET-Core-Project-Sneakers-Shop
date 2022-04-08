@@ -1,6 +1,6 @@
 ﻿namespace SneakersShop.Services.Sneakers.Models
 {
-    public class SneakerServiceModel
+    public class SneakerServiceModel : ISneakerModel
     {
         public int Id { get; init; }
 
@@ -15,5 +15,7 @@
         public decimal Price { get; init; }
 
         public string CategoryName { get; init; }
+
+        public bool isPublic { get; init; }
     }
 }

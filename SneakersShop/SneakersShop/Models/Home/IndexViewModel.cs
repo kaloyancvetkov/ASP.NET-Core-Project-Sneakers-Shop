@@ -1,4 +1,6 @@
-﻿namespace SneakersShop.Models.Home
+﻿using SneakersShop.Services.Sneakers.Models;
+
+namespace SneakersShop.Models.Home
 {
     public class IndexViewModel
     {
@@ -8,6 +10,6 @@
 
         public int TotalPurchases { get; init; }
 
-        public IList<LatestSneakerServiceModel> Sneakers { get; init; }
+        public List<LatestSneakerServiceModel> Sneakers { get; init; }
     }
 }

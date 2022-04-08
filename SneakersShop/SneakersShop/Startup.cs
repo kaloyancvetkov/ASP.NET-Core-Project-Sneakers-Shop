@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SneakersShop.Data;
-using SneakersShop.Data.Models;
-using SneakersShop.Infrastructure;
+using SneakersShop.Infrastructure.Extensions;
 using SneakersShop.Services.Sellers;
 using SneakersShop.Services.Sneakers;
 using SneakersShop.Services.Statistics;
@@ -61,6 +60,10 @@ app.UseHttpsRedirection().
     UseEndpoints(endpoints =>
     {
         endpoints.MapDefaultAreaRoute();
+        endpoints.MapControllerRoute(
+            name: "Sneaker Details",
+            pattern: "/Sneakers/Details/{id}/{information}",
+            defaults: new { controller = "Sneakers", action = "Details" });
 endpoints.MapDefaultControllerRoute();
         endpoints.MapRazorPages();
     });

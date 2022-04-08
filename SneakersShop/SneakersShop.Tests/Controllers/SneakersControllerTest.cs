@@ -12,7 +12,7 @@ namespace SneakersShop.Tests.Controllers
             //SneakerQueryServiceModel
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
-            var sneakerService = SneakerServiceMock.Instance;
+            //var sneakerService = SneakerServiceMock.Instance;
 
             data.Sneakers.Add(new Sneaker
             {

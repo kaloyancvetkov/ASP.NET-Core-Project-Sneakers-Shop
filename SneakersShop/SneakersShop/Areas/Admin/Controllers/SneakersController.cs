@@ -1,16 +1,29 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static SneakersShop.Areas.Admin.AdminConstants;
+﻿using Microsoft.AspNetCore.Mvc;
+using SneakersShop.Services.Sneakers;
 
 namespace SneakersShop.Areas.Admin.Controllers
 {
-    [Area(AreaName)]
-    [Authorize(Roles = AdministratorRoleName)]
-    public class SneakersController : Controller
+    public class SneakersController : AdminController
     {
-        public IActionResult Index()
+        private readonly ISneakerService sneakers;
+
+        public SneakersController(ISneakerService sneakers) => this.sneakers = sneakers;
+
+        public IActionResult All()
         {
-            return View();
+            var sneakers = this.sneakers
+                .All(publicOnly: false)
+                .Sneakers
+                .OrderBy(s => s.Id);
+
+            return View(sneakers);
+        }
+
+        public IActionResult ChangeVisibility(int id)
+        {
+            this.sneakers.ChangeVisibility(id);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SneakersShop.Data;
 using SneakersShop.Data.Models;
-using SneakersShop.Infrastructure;
+using SneakersShop.Infrastructure.Extensions;
 using SneakersShop.Models.Sellers;
 using static SneakersShop.WebConstants;
 

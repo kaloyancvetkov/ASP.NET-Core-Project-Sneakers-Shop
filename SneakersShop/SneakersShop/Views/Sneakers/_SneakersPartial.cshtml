@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<SneakerServiceModel>
 
 <div class="row">
-    @foreach (var sneakers in Model)
+    @foreach (var sneaker in Model)
     {
         <div class="col-md-4">
             <div class="card mb-5">
-                <img data-sizes="auto" src="@sneakers.ImageUrl" class="card-img-top" alt="@sneakers.Brand @sneakers.Model @sneakers.Color - @sneakers.Price (@sneakers.CategoryName)">
+                <img data-sizes="auto" src="@sneaker.ImageUrl" class="card-img-top" alt="@sneaker.Brand @sneaker.Model @sneaker.Color - @sneaker.Price (@sneaker.CategoryName)">
                 <div class="card-body text-center">
-                    <h5 class="card-title text-center">@sneakers.Brand @sneakers.Model (@sneakers.Color) (@sneakers.CategoryName)</h5>
-                    <a asp-controller="Sneakers" asp-action="Details" asp-route-id="@sneakers.Id" class="btn btn-primary">View</a>
+                    <h5 class="card-title text-center">@sneaker.Brand @sneaker.Model (@sneaker.Color) (@sneaker.CategoryName)</h5>
+                    <a asp-controller="Sneakers" asp-action="Details" asp-route-id="@sneaker.Id" asp-route-information="@sneaker.GetInfo()" class="btn btn-primary">View</a>
                     @if (ViewBag.AllowSneakerEdit == true || User.IsAdmin())
                     {
-                        <a asp-controller="Sneakers" asp-action="Edit" asp-route-id="@sneakers.Id" class="btn btn-warning">Edit</a>
-                        <a asp-controller="Sneakers" asp-action="Delete" asp-route-id="@sneakers.Id" class="btn btn-danger">Delete</a>
+                        <a asp-controller="Sneakers" asp-action="Edit" asp-route-id="@sneaker.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Sneakers" asp-action="Delete" asp-route-id="@sneaker.Id" class="btn btn-danger">Delete</a>
                     }
                 </div>
             </div>

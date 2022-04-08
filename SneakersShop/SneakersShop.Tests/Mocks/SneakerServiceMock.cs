@@ -10,14 +10,14 @@ namespace SneakersShop.Tests.Mocks
 {
     public class SneakerServiceMock
     {
-        public static ISneakerService Instance
-        {
-            get
-            {
-                var sneakerServiceMock = new Mock<ISneakerService>();
+        //public static ISneakerService Instance
+        //{
+        //    //get
+        //    {
+        //        var sneakerServiceMock = new Mock<ISneakerService>();
 
 
-            }
-        }
+        //    }
+        //}
     }
 }
