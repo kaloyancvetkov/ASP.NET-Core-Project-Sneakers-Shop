@@ -6,7 +6,7 @@ namespace SneakersShop.Models.Sneakers
 {
     public class AllSneakersQueryModel
     {
-        public const int SneakersPerPage = 3;
+        public const int SneakersPerPage = 6;
 
         public string Brand { get; init; }
 

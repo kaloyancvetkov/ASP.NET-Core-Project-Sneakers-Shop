@@ -6,6 +6,7 @@ using SneakersShop.Infrastructure;
 using SneakersShop.Models.Sneakers;
 using SneakersShop.Services.Sellers;
 using SneakersShop.Services.Sneakers;
+using static SneakersShop.WebConstants;
 
 namespace TShirtsShop.Controllers
 {
@@ -96,6 +97,8 @@ namespace TShirtsShop.Controllers
                 sneaker.CategoryId,
                 sellerId);
 
+            TempData[GlobalMessageKey] = "Your sneaker was added successfully!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -163,6 +166,7 @@ namespace TShirtsShop.Controllers
                 sneaker.Price,
                 sneaker.CategoryId);
 
+            TempData[GlobalMessageKey] = "Your sneaker was edited successfuylly!";
 
             return RedirectToAction(nameof(All));
         }

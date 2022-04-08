@@ -4,6 +4,7 @@ using SneakersShop.Data;
 using SneakersShop.Data.Models;
 using SneakersShop.Infrastructure;
 using SneakersShop.Models.Sellers;
+using static SneakersShop.WebConstants;
 
 namespace SneakersShop.Controllers
 {
@@ -46,6 +47,8 @@ namespace SneakersShop.Controllers
 
             this.data.Sellers.Add(sellerData);
             this.data.SaveChanges();
+
+            TempData[GlobalMessageKey] = "Thank you for becoming a seller!";
 
             return RedirectToAction("All", "Sneakers");
         }
