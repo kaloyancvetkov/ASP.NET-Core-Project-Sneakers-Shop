@@ -168,7 +168,7 @@ namespace TShirtsShop.Controllers
                 return BadRequest();
             }
 
-            this.sneakers.Edit(
+            var edited = this.sneakers.Edit(
                 id,
                 sneaker.Brand,
                 sneaker.Model,
@@ -178,6 +178,11 @@ namespace TShirtsShop.Controllers
                 sneaker.Price,
                 sneaker.CategoryId,
                 this.User.IsAdmin());
+
+            if (!edited)
+            {
+                return BadRequest();
+            }
 
             TempData[GlobalMessageKey] = $"Your sneaker was edited {(this.User.IsAdmin() ? string.Empty : " and it is awaiting for approval from the admin")}!";
 

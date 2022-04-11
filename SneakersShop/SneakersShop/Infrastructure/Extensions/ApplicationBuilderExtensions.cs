@@ -65,7 +65,7 @@ namespace SneakersShop.Infrastructure.Extensions
 
                 await roleManager.CreateAsync(role);
 
-                const string adminEmail = "admin@crs.com";
+                const string adminEmail = "admin@sns.com";
                 const string adminPassword = "admin123";
 
                 var user = new IdentityUser
