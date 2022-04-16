@@ -4,6 +4,7 @@ using SneakersShop.Data.Models;
 using SneakersShop.Services.Sneakers.Models;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace SneakersShop.Services.Sneakers
 {
@@ -11,11 +12,14 @@ namespace SneakersShop.Services.Sneakers
     {
         private readonly SneakersShopDbContext data;
         private readonly IMapper mapper;
+        private readonly IMemoryCache cache;
 
-        public SneakerService(SneakersShopDbContext data, IMapper mapper)
+
+        public SneakerService(SneakersShopDbContext data, IMapper mapper, IMemoryCache cache)
         {
             this.data = data;
             this.mapper = mapper;
+            this.cache = cache;
         }
 
         public SneakerQueryServiceModel All(
@@ -142,6 +146,23 @@ namespace SneakersShop.Services.Sneakers
             this.data.SaveChanges();
 
             return true;
+        }
+
+        public bool Delete(int id)
+        {
+            var sneaker = this.data
+                .Sneakers
+                .FirstOrDefault(s => s.Id == id);
+
+            if (sneaker != null)
+            {
+                this.cache.Remove(sneaker);
+                this.data.Remove(sneaker);
+                this.data.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
 
         public SneakerDetailsServiceModel Details(int id)

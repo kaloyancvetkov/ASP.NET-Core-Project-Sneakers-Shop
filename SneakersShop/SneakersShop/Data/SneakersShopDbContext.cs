@@ -12,6 +12,7 @@ namespace SneakersShop.Data
         public SneakersShopDbContext(DbContextOptions<SneakersShopDbContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Sneaker> Sneakers { get; init; }
@@ -39,8 +40,10 @@ namespace SneakersShop.Data
                 .WithOne()
                 .HasForeignKey<Seller>(s => s.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
 
             base.OnModelCreating(builder);
         }
+
     }
 }

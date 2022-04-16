@@ -188,5 +188,18 @@ namespace TShirtsShop.Controllers
 
             return RedirectToAction(nameof(Details), new { id = id, information = sneaker.GetInfo() });
         }
+
+        public IActionResult Delete(int id)
+        {
+            var isDeleted = this.sneakers.Delete(id);
+
+            if (isDeleted)
+            {
+                TempData[GlobalMessageKey] = "Your sneaker was successfully removed!";
+                return RedirectToAction(nameof(All));
+            }
+
+            return BadRequest();
+        }
     }
 }

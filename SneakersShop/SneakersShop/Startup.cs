@@ -33,6 +33,7 @@ builder.Services.AddControllersWithViews(options =>
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+
 builder.Services.AddTransient<IStatisticsService, StatisticsService>();
 builder.Services.AddTransient<ISneakerService, SneakerService>();
 builder.Services.AddTransient<ISellerService, SellerService>();

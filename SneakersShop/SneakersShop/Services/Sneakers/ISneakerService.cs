@@ -34,6 +34,8 @@ namespace SneakersShop.Services.Sneakers
                 int categoryId,
                 bool isPublic);
 
+        bool Delete(int id);
+
         IEnumerable<SneakerServiceModel> ByUser(string userId);
 
         bool IsBySeller(int sneakerId, int sellerId);
