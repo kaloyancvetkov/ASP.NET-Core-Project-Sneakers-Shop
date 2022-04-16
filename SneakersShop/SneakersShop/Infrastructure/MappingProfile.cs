@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using SneakersShop.Data.Models;
-using SneakersShop.Models.Home;
 using SneakersShop.Models.Sneakers;
 using SneakersShop.Services.Sneakers.Models;
 

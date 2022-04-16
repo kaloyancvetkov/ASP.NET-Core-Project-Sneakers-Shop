@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
 using SneakersShop.Controllers.Api;
 using SneakersShop.Test.Mocks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SneakersShop.Test.Controllers.Api
 {

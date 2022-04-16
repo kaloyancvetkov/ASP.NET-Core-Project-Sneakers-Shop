@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SneakersShop.Data;
 using SneakersShop.Services.Statistics;
 
 namespace SneakersShop.Controllers.Api

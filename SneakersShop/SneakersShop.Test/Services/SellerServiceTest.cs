@@ -2,11 +2,6 @@
 using SneakersShop.Data.Models;
 using SneakersShop.Services.Sellers;
 using SneakersShop.Test.Mocks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SneakersShop.Test.Services
 {

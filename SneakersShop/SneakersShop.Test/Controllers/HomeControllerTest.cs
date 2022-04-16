@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using SneakersShop.Controllers;
-using SneakersShop.Test.Mocks;
 
 namespace SneakersShop.Test.Controllers
 {
